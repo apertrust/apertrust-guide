@@ -1,0 +1,30 @@
+name: Check
+
+# A pull request builds the Guide as its branch's version, and its pages' topics are
+# read, so a page that breaks the build or two pages claiming one topic never merge.
+on:
+  pull_request:
+
+permissions: {}
+
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24.22.2"
+          cache: npm
+      - run: npm ci --no-fund --no-audit
+      - run: npm run topics
+      - run: npm run build
