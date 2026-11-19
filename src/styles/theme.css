@@ -167,9 +167,10 @@ starlight-toc a[aria-current='true']:hover {
 	font-variation-settings: 'SOFT' 100, 'WONK' 1;
 }
 
-/* Running text and its headings: a dashed rule over each section, as on the website. */
+/* Running text and its headings, at the website's size: a dashed rule over each section,
+   as on the website. */
 .sl-markdown-content {
-	font-size: 1.1875rem;
+	font-size: 1.0625rem;
 	line-height: 1.6;
 }
 .sl-markdown-content h2 {
@@ -210,6 +211,10 @@ starlight-toc a[aria-current='true']:hover {
 }
 .starlight-aside--tip .starlight-aside__icon {
 	display: none;
+}
+/* A note's text a step under the running text, as the website's. */
+.starlight-aside--tip .starlight-aside__content {
+	font-size: 1rem;
 }
 /* A link in a Tip keeps the Tip's text colour, hovered too, which keeps its contrast on
    the yellow; the hover thickens its underline instead. */
