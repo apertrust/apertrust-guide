@@ -1,0 +1,33 @@
+---
+// A Help topic's address, /{version}/{language}/topic/{topic}/, as the app builds it
+// (decision 97): a page that sends the reader on to the page claiming the topic, in the
+// same language. A topic no page claims has no page here; the site's 404 page says it is
+// not written yet.
+import { claims, type Claim } from "../../../topics";
+
+export async function getStaticPaths() {
+  const languages = ["en", "uk", "pl"];
+  const all = await claims();
+  return languages.flatMap((lang) =>
+    all.map((claim) => ({ params: { lang, topic: claim.topic }, props: { claim } })),
+  );
+}
+
+const { lang } = Astro.params;
+const { claim } = Astro.props as { claim: Claim };
+const page = claim.page ? `${claim.page}/` : "";
+const target = `${import.meta.env.BASE_URL}${lang}/${page}${claim.anchor ? `#${claim.anchor}` : ""}`;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={target} />
+    <title>Apertrust Guide</title>
+  </head>
+  <body>
+    <a href={target}>{target}</a>
+  </body>
+</html>

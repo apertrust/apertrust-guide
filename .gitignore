@@ -1,0 +1,8 @@
+node_modules/
+dist/
+site-build/
+.astro/
+.DS_Store
+*.log
+AGENTS.local.md
+.versions/

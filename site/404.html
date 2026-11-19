@@ -1,0 +1,118 @@
+<!doctype html>
+<!--
+  The site's one 404 page, which GitHub Pages serves for every path the site does not
+  have (decision 97). tools/build-site.sh fills in the versions built and the newest.
+  - /{version}/{language}/topic/{topic}/ with no page claiming the topic: the topic's
+    page is not written yet, said in that language, with a link to that version's start.
+  - A language the Guide does not have: the same path in English.
+  - /latest/…: the same path in the newest version.
+  - Anything else: not found, with a link to the start page.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Apertrust Guide</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --text: #1f2328;
+        --muted: #59636e;
+        --link: #0b5cad;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #17181c;
+          --text: #e6e6e6;
+          --muted: #a0a4ab;
+          --link: #8ab4f8;
+        }
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font: 1rem/1.6 system-ui, sans-serif;
+      }
+      main {
+        max-width: 36rem;
+        margin: 16vh auto 0;
+        padding: 0 1rem;
+      }
+      h1 {
+        font-size: 1.6rem;
+        margin: 0 0 0.75rem;
+      }
+      p {
+        color: var(--muted);
+        margin: 0 0 1rem;
+      }
+      a {
+        color: var(--link);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1 id="title">Page not found</h1>
+      <p id="body">There is no page at this address.</p>
+      <p><a id="start" href="/">Go to the Apertrust Guide</a></p>
+    </main>
+    <script>
+      const versions = __VERSIONS__;
+      const latest = "__LATEST__";
+      const languages = ["en", "uk", "pl"];
+      const words = {
+        en: {
+          lang: "en-GB",
+          missingTitle: "Page not found",
+          missingBody: "There is no page at this address.",
+          topicTitle: "This page isn't written yet",
+          topicBody:
+            "The Guide doesn't have this page yet. It's on its way; meanwhile the start page and its search may help.",
+          start: "Go to the start page",
+        },
+        uk: {
+          lang: "uk",
+          missingTitle: "Сторінку не знайдено",
+          missingBody: "За цією адресою немає сторінки.",
+          topicTitle: "Цю сторінку ще не написано",
+          topicBody:
+            "У посібнику ще немає цієї сторінки. Вона з'явиться; а поки що допоможуть головна сторінка і пошук.",
+          start: "На головну сторінку",
+        },
+        pl: {
+          lang: "pl",
+          missingTitle: "Nie znaleziono strony",
+          missingBody: "Pod tym adresem nie ma strony.",
+          topicTitle: "Ta strona nie jest jeszcze napisana",
+          topicBody:
+            "Przewodnik nie ma jeszcze tej strony. Pojawi się; tymczasem pomoże strona główna i wyszukiwarka.",
+          start: "Przejdź do strony głównej",
+        },
+      };
+
+      const parts = location.pathname.split("/").filter(Boolean);
+      let [version, language, ...rest] = parts;
+      const tail = rest.length ? rest.join("/") + "/" : "";
+      if (version === "latest") {
+        location.replace(`/${latest}/${language ? language + "/" : ""}${tail}`);
+      } else if (versions.includes(version) && language && !languages.includes(language)) {
+        location.replace(`/${version}/en/${tail}`);
+      } else {
+        const known = versions.includes(version);
+        const lang = known && languages.includes(language) ? language : "en";
+        const w = words[lang];
+        const topic = known && rest[0] === "topic";
+        document.documentElement.lang = w.lang;
+        document.getElementById("title").textContent = topic ? w.topicTitle : w.missingTitle;
+        document.getElementById("body").textContent = topic ? w.topicBody : w.missingBody;
+        const start = document.getElementById("start");
+        start.textContent = w.start;
+        start.href = `/${known ? version : latest}/${lang}/`;
+      }
+    </script>
+  </body>
+</html>
