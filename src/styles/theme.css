@@ -248,3 +248,102 @@ starlight-toc a[aria-current='true']:hover {
 	font-size: 0.8125rem;
 	color: var(--sl-color-gray-3);
 }
+
+/* The theme and language selects: fields like the search, in DM Mono, wide enough for
+   their words. The page's colour scheme follows the theme, so the browser's own list
+   matches it. */
+:root {
+	color-scheme: dark;
+}
+:root[data-theme='light'] {
+	color-scheme: light;
+}
+starlight-theme-select label,
+starlight-lang-select label {
+	height: 2.5rem;
+	box-sizing: border-box;
+	border: 1px solid var(--sl-color-hairline);
+	border-radius: 6px;
+	background-color: var(--sl-color-gray-6);
+	color: var(--sl-color-white);
+	font-family: var(--sl-font-mono);
+}
+starlight-theme-select label:hover,
+starlight-lang-select label:hover {
+	border-color: var(--sl-color-gray-4);
+}
+starlight-theme-select .label-icon,
+starlight-lang-select .label-icon {
+	inset-inline-start: 0.7rem;
+}
+starlight-theme-select .caret,
+starlight-lang-select .caret {
+	inset-inline-end: 0.45rem;
+}
+starlight-theme-select select,
+starlight-lang-select select {
+	width: auto;
+	height: 100%;
+	margin-inline: 0;
+	padding-block: 0;
+	padding-inline: 2rem 2rem;
+	border: 0;
+	border-radius: 6px;
+	background-color: transparent;
+	color: inherit;
+	font-family: inherit;
+	font-size: 0.875rem;
+}
+starlight-theme-select option,
+starlight-lang-select option {
+	background-color: var(--sl-color-gray-6);
+	color: var(--sl-color-white);
+	font-family: var(--sl-font-mono);
+}
+
+/* Where the browser draws the list itself (Chromium's customisable select), it is a
+   card in the theme, the chosen item marked in amber as the sidebar's current page.
+   Elsewhere the browser's own list stays, in the theme's colour scheme. */
+@supports (appearance: base-select) {
+	starlight-theme-select select,
+	starlight-lang-select select,
+	starlight-theme-select select::picker(select),
+	starlight-lang-select select::picker(select) {
+		appearance: base-select;
+	}
+	starlight-theme-select select::picker-icon,
+	starlight-lang-select select::picker-icon {
+		display: none;
+	}
+	starlight-theme-select select::picker(select),
+	starlight-lang-select select::picker(select) {
+		margin-block: 0.35rem;
+		padding: 0.35rem;
+		border: 1px solid var(--sl-color-hairline);
+		border-radius: 8px;
+		background-color: var(--sl-color-gray-6);
+		box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+	}
+	starlight-theme-select option,
+	starlight-lang-select option {
+		padding: 0.4rem 0.75rem;
+		border-radius: 5px;
+		font-size: 0.875rem;
+	}
+	starlight-theme-select option::checkmark,
+	starlight-lang-select option::checkmark {
+		display: none;
+	}
+	starlight-theme-select option:hover,
+	starlight-lang-select option:hover,
+	starlight-theme-select option:focus-visible,
+	starlight-lang-select option:focus-visible {
+		background-color: var(--sl-color-black);
+		outline: none;
+	}
+	starlight-theme-select option:checked,
+	starlight-lang-select option:checked {
+		font-weight: 500;
+		box-shadow: inset 3px 0 0 var(--guide-mark);
+	}
+}
