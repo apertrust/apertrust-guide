@@ -6,7 +6,6 @@ import starlight from "@astrojs/starlight";
 // /development/ from main, /X.Y/ from release-X.Y. A plain `npm run build` or
 // `npm run dev` is the development version.
 const base = process.env.GUIDE_BASE ?? "/development";
-const branch = process.env.GUIDE_BRANCH ?? "main";
 
 export default defineConfig({
   site: "https://guide.apertrust.org",
@@ -50,9 +49,6 @@ export default defineConfig({
           href: "https://github.com/apertrust/apertrust",
         },
       ],
-      editLink: {
-        baseUrl: `https://github.com/apertrust/apertrust-guide/edit/${branch}/`,
-      },
       // Diátaxis's four kinds, how-to's first after the walk through.
       sidebar: [
         {

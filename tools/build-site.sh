@@ -13,19 +13,19 @@ work="$root/.versions"
 rm -rf "$out" "$work"
 mkdir -p "$out" "$work"
 
-# One version: the tree at $1 built on the base /$2/, its edit links to branch $3.
+# One version: the tree at $1 built on the base /$2/.
 build() {
-  (cd "$1" && npm ci --no-fund --no-audit && GUIDE_BASE="/$2" GUIDE_BRANCH="$3" npx astro build --outDir "$out/$2")
+  (cd "$1" && npm ci --no-fund --no-audit && GUIDE_BASE="/$2" npx astro build --outDir "$out/$2")
 }
 
-build "$root" development main
+build "$root" development
 
 # The release branches, oldest first, so the last is the newest.
 releases=$(git for-each-ref --format='%(refname:lstrip=3)' 'refs/remotes/origin/release-*' | sed 's/^release-//' | sort -V)
 latest=development
 for version in $releases; do
   git worktree add --detach "$work/$version" "origin/release-$version" >/dev/null
-  build "$work/$version" "$version" "release-$version"
+  build "$work/$version" "$version"
   latest=$version
 done
 
