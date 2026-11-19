@@ -27,6 +27,8 @@ Astro needs Node.js 22.23.4 or later.
   ```
 
   A topic no page claims lands on the site's 404 page, which says the page is not written yet.
+- **The look** is the website's: `src/styles/theme.css` sets Starlight's colours, light the website's paper and ink and dark its footer's, with Fraunces for reading, DM Mono for navigation and labels and Caveat for a Tip's label. The fonts are served from the Guide itself (Fontsource), with Literata and IBM Plex Mono for the Cyrillic that Fraunces and DM Mono lack. The header's title and its apertrust.org link are `src/components/`.
+- **Screenshots** of the app, in its dark theme on both of the Guide's, go through `src/components/Screenshot.astro`, which frames them and shows them at the app's own size (see AGENTS.md).
 - **Versions:** `main` is published as `/development/`, and each `release-X.Y` branch as `/X.Y/`. `/latest/` and the site's root go to the newest release. Every push to one of them publishes the whole site (`.github/workflows/deploy.yml`).
 
 The design is the app's decision 97, [Help topics and the Apertrust Guide](https://github.com/apertrust/apertrust/blob/main/docs/decisions/0097-help-topics-and-the-apertrust-guide.md).

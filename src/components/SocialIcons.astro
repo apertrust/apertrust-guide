@@ -1,0 +1,33 @@
+---
+// Starlight's social links, then a pill back to the website, as the website's header
+// ends in one.
+import Default from "@astrojs/starlight/components/SocialIcons.astro";
+---
+
+<Default />
+<a class="guide-site" href="https://apertrust.org">apertrust.org</a>
+
+<style>
+  .guide-site {
+    display: inline-flex;
+    align-items: center;
+    height: 2.5rem;
+    padding: 0 1.2rem;
+    border-radius: 1.25rem;
+    background: var(--guide-button-bg);
+    color: var(--guide-button-text);
+    font-family: var(--sl-font-mono);
+    font-size: 0.875rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .guide-site:hover {
+    color: var(--guide-button-text);
+    opacity: 0.88;
+  }
+  @media (max-width: 50rem) {
+    .guide-site {
+      display: none;
+    }
+  }
+</style>
