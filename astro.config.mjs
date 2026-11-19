@@ -19,8 +19,22 @@ export default defineConfig({
         uk: "Посібник Apertrust",
         pl: "Przewodnik Apertrust",
       },
-      logo: { src: "./src/assets/logo.svg", alt: "Apertrust" },
       favicon: "/favicon.svg",
+      // The website's look (src/styles/theme.css), its fonts served from the Guide itself.
+      customCss: [
+        "@fontsource-variable/fraunces/full.css",
+        "@fontsource-variable/fraunces/full-italic.css",
+        "@fontsource-variable/literata/wght.css",
+        "@fontsource/dm-mono/400.css",
+        "@fontsource/dm-mono/500.css",
+        "@fontsource/ibm-plex-mono/400.css",
+        "@fontsource/caveat/700.css",
+        "./src/styles/theme.css",
+      ],
+      components: {
+        SiteTitle: "./src/components/SiteTitle.astro",
+        SocialIcons: "./src/components/SocialIcons.astro",
+      },
       // Every language in a folder of its own, English the source; a page not yet
       // translated shows the English page with Starlight's note saying so.
       defaultLocale: "en",

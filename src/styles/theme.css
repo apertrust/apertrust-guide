@@ -1,0 +1,351 @@
+/*
+ * The Apertrust Guide's theme: the website's look, from the wireframe's Website · vision
+ * boards "The Apertrust Guide · light" and "· dark". Light is the website's own colours;
+ * dark is the website footer's. Starlight's dark theme is its :root, its light theme
+ * [data-theme='light']; these rules sit outside its cascade layers, so they win.
+ *
+ * Type: Fraunces for reading, DM Mono for navigation and labels, Caveat for the
+ * handwritten Tip. Fraunces and DM Mono have no Cyrillic, so Literata and IBM Plex Mono
+ * follow them in the stacks: the browser takes from them only what the first lacks.
+ */
+
+:root {
+	/* Dark: the website's footer. */
+	--sl-color-white: #f4eee2; /* headings, the strongest text */
+	--sl-color-gray-1: #eae1d2;
+	--sl-color-gray-2: #d9cfbf; /* running text */
+	--sl-color-gray-3: #bfb3a0; /* labels */
+	--sl-color-gray-4: #8c7f6c;
+	--sl-color-gray-5: #3a332c; /* rules */
+	--sl-color-gray-6: #221e1a; /* fields, the current item */
+	--sl-color-black: #171411; /* the page */
+
+	--sl-color-accent-low: #3b3221;
+	--sl-color-accent: #e8a13a;
+	--sl-color-accent-high: #e8a13a;
+
+	--sl-color-text: var(--sl-color-gray-2);
+	--sl-color-text-accent: var(--sl-color-accent-high);
+	--sl-color-text-invert: var(--sl-color-black);
+	--sl-color-bg: var(--sl-color-black);
+	--sl-color-bg-nav: var(--sl-color-black);
+	--sl-color-bg-sidebar: var(--sl-color-black);
+	--sl-color-bg-inline-code: var(--sl-color-gray-6);
+	--sl-color-bg-accent: var(--sl-color-accent);
+	--sl-color-hairline-light: var(--sl-color-gray-5);
+	--sl-color-hairline: var(--sl-color-gray-5);
+	--sl-color-hairline-shade: var(--sl-color-gray-5); /* the line under the header */
+
+	/* The Guide's own. */
+	--guide-link: #e8a13a;
+	--guide-link-hover: #f4eee2;
+	--guide-mark: #e8a13a; /* the current item, focus */
+	--guide-square: #dc7028; /* the logo's square */
+	--guide-dash: #4a4238; /* the rule over a section */
+	--guide-tip-bg: #3b3221;
+	--guide-tip-border: #5a4a2c;
+	--guide-tip-label: #f2c230;
+	--guide-tip-text: #f4eee2;
+	--guide-tip-shadow: none;
+	--guide-shot-border: #3a332c;
+	--guide-shot-shadow: none;
+	--guide-button-bg: #f4eee2;
+	--guide-button-text: #171411;
+
+	--sl-font: 'Fraunces Variable', 'Literata Variable', Georgia, serif;
+	--sl-font-mono: 'DM Mono', 'IBM Plex Mono', ui-monospace, monospace;
+	--guide-font-hand: 'Caveat', cursive;
+
+	--sl-text-h1: 3.25rem;
+	--sl-text-h2: 1.625rem;
+	--sl-text-h3: 1.3rem;
+	--sl-content-width: 44rem;
+}
+
+:root[data-theme='light'] {
+	/* Light: the website's paper and ink. */
+	--sl-color-white: #1e1a16;
+	--sl-color-gray-1: #2b2520;
+	--sl-color-gray-2: #3f3830;
+	--sl-color-gray-3: #5c5348;
+	--sl-color-gray-4: #8c7f6c;
+	--sl-color-gray-5: #dccfb6;
+	--sl-color-gray-6: #fbf8f1;
+	--sl-color-gray-7: #fbf8f1;
+	--sl-color-black: #f4eee2;
+
+	--sl-color-accent-low: #f7e3d2;
+	--sl-color-accent: #d66a20;
+	--sl-color-accent-high: #a15717;
+
+	--sl-color-text-accent: var(--sl-color-accent-high);
+	--sl-color-text-invert: var(--sl-color-black);
+	--sl-color-bg-nav: var(--sl-color-black);
+	--sl-color-bg-sidebar: var(--sl-color-black);
+	--sl-color-bg-inline-code: var(--sl-color-gray-6);
+	--sl-color-hairline-light: var(--sl-color-gray-5);
+	--sl-color-hairline: var(--sl-color-gray-5);
+	--sl-color-hairline-shade: var(--sl-color-gray-5);
+	--sl-color-backdrop-overlay: rgba(30, 26, 22, 0.5);
+
+	/* Links are ink and underlined, as on the website, amber on hover. */
+	--guide-link: #1e1a16;
+	--guide-link-hover: #a15717;
+	--guide-mark: #d66a20;
+	--guide-square: #d66a20;
+	--guide-dash: #cdbfa6;
+	--guide-tip-bg: #f2c230;
+	--guide-tip-border: transparent;
+	--guide-tip-label: #1e1a16;
+	--guide-tip-text: #1e1a16;
+	--guide-tip-shadow: 0 10px 20px rgba(60, 40, 20, 0.18);
+	--guide-shot-border: #1e1a16;
+	--guide-shot-shadow: 0 16px 34px rgba(60, 40, 20, 0.22);
+	--guide-button-bg: #1e1a16;
+	--guide-button-text: #f4eee2;
+}
+
+body {
+	font-variation-settings: 'SOFT' 50;
+}
+
+:focus-visible {
+	outline: 3px solid var(--guide-mark);
+	outline-offset: 2px;
+}
+
+/* The header: DM Mono. Starlight draws the one line under it, in --sl-color-hairline-shade. */
+.header {
+	font-family: var(--sl-font-mono);
+}
+
+/* The sidebar: DM Mono, group labels in small capitals, the current page a card
+   marked in amber. */
+.sidebar-content {
+	font-family: var(--sl-font-mono);
+	font-size: 0.875rem;
+}
+.sidebar-content .group-label .large {
+	font-size: 0.75rem;
+	font-weight: 400;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--sl-color-gray-3);
+}
+.sidebar-content a {
+	color: var(--sl-color-white);
+}
+.sidebar-content a:hover {
+	color: var(--guide-link-hover);
+}
+.sidebar-content [aria-current='page'],
+.sidebar-content [aria-current='page']:hover,
+.sidebar-content [aria-current='page']:focus {
+	font-weight: 500;
+	color: var(--sl-color-white);
+	background-color: var(--sl-color-gray-6);
+	box-shadow: inset 3px 0 0 var(--guide-mark);
+	border-radius: 6px;
+}
+
+/* On this page: DM Mono, the section shown marked in amber. */
+starlight-toc,
+mobile-starlight-toc {
+	font-family: var(--sl-font-mono);
+}
+starlight-toc a[aria-current='true'],
+starlight-toc a[aria-current='true']:hover {
+	color: var(--sl-color-white);
+	box-shadow: -3px 0 0 var(--guide-mark);
+}
+
+/* The title: Fraunces at its softest. */
+.content-panel h1 {
+	font-weight: 400;
+	letter-spacing: -0.025em;
+	line-height: 1;
+	font-variation-settings: 'SOFT' 100, 'WONK' 1;
+}
+
+/* Running text and its headings: a dashed rule over each section, as on the website. */
+.sl-markdown-content {
+	font-size: 1.1875rem;
+	line-height: 1.6;
+}
+.sl-markdown-content h2 {
+	padding-top: 1.1rem;
+	border-top: 1.5px dashed var(--guide-dash);
+	font-weight: 500;
+	line-height: 1.2;
+}
+.sl-markdown-content h3 {
+	font-weight: 500;
+}
+.sl-markdown-content a:not(:where(.not-content *)) {
+	color: var(--guide-link);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.18em;
+}
+.sl-markdown-content a:not(:where(.not-content *)):hover {
+	color: var(--guide-link-hover);
+}
+.sl-markdown-content code:not(:where(.not-content *)) {
+	font-size: 0.85em;
+}
+
+/* A Tip is the website's sticky note: yellow on paper, its label handwritten. */
+.starlight-aside--tip {
+	--sl-color-asides-text-accent: var(--guide-tip-label);
+	--sl-color-asides-border: var(--guide-tip-border);
+	border: 1px solid var(--guide-tip-border);
+	background-color: var(--guide-tip-bg);
+	color: var(--guide-tip-text);
+	box-shadow: var(--guide-tip-shadow);
+	transform: rotate(-0.6deg);
+}
+.starlight-aside--tip .starlight-aside__title {
+	font-family: var(--guide-font-hand);
+	font-size: 1.6rem;
+	font-weight: 700;
+}
+.starlight-aside--tip .starlight-aside__icon {
+	display: none;
+}
+/* A link in a Tip keeps the Tip's text colour, hovered too, which keeps its contrast on
+   the yellow; the hover thickens its underline instead. */
+.sl-markdown-content .starlight-aside--tip a,
+.sl-markdown-content .starlight-aside--tip a:hover {
+	color: var(--guide-tip-text);
+}
+.sl-markdown-content .starlight-aside--tip a:hover {
+	text-decoration-thickness: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+	.starlight-aside--tip {
+		transform: none;
+	}
+}
+
+/* A screenshot of the app, framed so it reads as the app, not the page: a dark edge and
+   the paper's shadow in light, a hairline in dark (Screenshot.astro). */
+.guide-screenshot {
+	margin: 1.5rem 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.6rem;
+}
+.guide-screenshot img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	border: 1px solid var(--guide-shot-border);
+	border-radius: 6px;
+	box-shadow: var(--guide-shot-shadow);
+}
+.guide-screenshot figcaption {
+	font-family: var(--sl-font-mono);
+	font-size: 0.8125rem;
+	color: var(--sl-color-gray-3);
+}
+
+/* The theme and language selects: fields like the search, in DM Mono, wide enough for
+   their words. The page's colour scheme follows the theme, so the browser's own list
+   matches it. */
+:root {
+	color-scheme: dark;
+}
+:root[data-theme='light'] {
+	color-scheme: light;
+}
+starlight-theme-select label,
+starlight-lang-select label {
+	height: 2.5rem;
+	box-sizing: border-box;
+	border: 1px solid var(--sl-color-hairline);
+	border-radius: 6px;
+	background-color: var(--sl-color-gray-6);
+	color: var(--sl-color-white);
+	font-family: var(--sl-font-mono);
+}
+starlight-theme-select label:hover,
+starlight-lang-select label:hover {
+	border-color: var(--sl-color-gray-4);
+}
+starlight-theme-select .label-icon,
+starlight-lang-select .label-icon {
+	inset-inline-start: 0.7rem;
+}
+starlight-theme-select .caret,
+starlight-lang-select .caret {
+	inset-inline-end: 0.45rem;
+}
+starlight-theme-select select,
+starlight-lang-select select {
+	display: flex;
+	align-items: center;
+	width: auto;
+	height: 100%;
+	line-height: 1;
+	margin-inline: 0;
+	padding-block: 0;
+	padding-inline: 2rem 2rem;
+	border: 0;
+	border-radius: 6px;
+	background-color: transparent;
+	color: inherit;
+	font-family: inherit;
+	font-size: 0.875rem;
+}
+starlight-theme-select option,
+starlight-lang-select option {
+	background-color: var(--sl-color-gray-6);
+	color: var(--sl-color-white);
+	font-family: var(--sl-font-mono);
+}
+
+/* Where the browser draws the list itself (Chromium's customisable select), it is a
+   card in the theme, the chosen item marked in amber as the sidebar's current page.
+   Elsewhere the browser's own list stays, in the theme's colour scheme. */
+@supports (appearance: base-select) {
+	starlight-theme-select select,
+	starlight-lang-select select,
+	starlight-theme-select select::picker(select),
+	starlight-lang-select select::picker(select) {
+		appearance: base-select;
+	}
+	starlight-theme-select select::picker-icon,
+	starlight-lang-select select::picker-icon {
+		display: none;
+	}
+	starlight-theme-select select::picker(select),
+	starlight-lang-select select::picker(select) {
+		margin-block: 0.35rem;
+		padding: 0.35rem;
+		border: 1px solid var(--sl-color-hairline);
+		border-radius: 8px;
+		background-color: var(--sl-color-gray-6);
+		box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+	}
+	starlight-theme-select option,
+	starlight-lang-select option {
+		padding: 0.4rem 0.75rem;
+		border-radius: 5px;
+		font-size: 0.875rem;
+	}
+	starlight-theme-select option::checkmark,
+	starlight-lang-select option::checkmark {
+		display: none;
+	}
+	starlight-theme-select option:hover,
+	starlight-lang-select option:hover,
+	starlight-theme-select option:focus-visible,
+	starlight-lang-select option:focus-visible {
+		background-color: var(--sl-color-black);
+		outline: none;
+	}
+	starlight-theme-select option:checked,
+	starlight-lang-select option:checked {
+		font-weight: 500;
+		box-shadow: inset 3px 0 0 var(--guide-mark);
+	}
+}
