@@ -34,7 +34,7 @@
 	--sl-color-bg-accent: var(--sl-color-accent);
 	--sl-color-hairline-light: var(--sl-color-gray-5);
 	--sl-color-hairline: var(--sl-color-gray-5);
-	--sl-color-hairline-shade: var(--sl-color-black);
+	--sl-color-hairline-shade: var(--sl-color-gray-5); /* the line under the header */
 
 	/* The Guide's own. */
 	--guide-link: #e8a13a;
@@ -114,9 +114,8 @@ body {
 	outline-offset: 2px;
 }
 
-/* The header: DM Mono, a hairline under it, as on the website. */
+/* The header: DM Mono. Starlight draws the one line under it, in --sl-color-hairline-shade. */
 .header {
-	border-bottom: 1px solid var(--sl-color-hairline);
 	font-family: var(--sl-font-mono);
 }
 
@@ -282,8 +281,11 @@ starlight-lang-select .caret {
 }
 starlight-theme-select select,
 starlight-lang-select select {
+	display: flex;
+	align-items: center;
 	width: auto;
 	height: 100%;
+	line-height: 1;
 	margin-inline: 0;
 	padding-block: 0;
 	padding-inline: 2rem 2rem;
