@@ -1,6 +1,8 @@
 /*
  * The Apertrust Guide's theme: the website's look, from the wireframe's Website · vision
- * boards "The Apertrust Guide · light" and "· dark". Light is the website's own colours;
+ * boards "The Apertrust Guide · light, the website's tones" and "· dark". The interface
+ * has no lines: the sidebar is the website's kraft band beside the paper, the fields are
+ * filled, and only the content keeps its dashed rule over a section. Light is the website's own colours;
  * dark is the website footer's. Starlight's dark theme is its :root, its light theme
  * [data-theme='light']; these rules sit outside its cascade layers, so they win.
  *
@@ -29,12 +31,12 @@
 	--sl-color-text-invert: var(--sl-color-black);
 	--sl-color-bg: var(--sl-color-black);
 	--sl-color-bg-nav: var(--sl-color-black);
-	--sl-color-bg-sidebar: var(--sl-color-black);
+	--sl-color-bg-sidebar: #221e1a; /* the band, a step over the page */
 	--sl-color-bg-inline-code: var(--sl-color-gray-6);
 	--sl-color-bg-accent: var(--sl-color-accent);
 	--sl-color-hairline-light: var(--sl-color-gray-5);
 	--sl-color-hairline: var(--sl-color-gray-5);
-	--sl-color-hairline-shade: var(--sl-color-gray-5); /* the line under the header */
+	--sl-color-hairline-shade: var(--sl-color-gray-5);
 
 	/* The Guide's own. */
 	--guide-link: #e8a13a;
@@ -42,12 +44,14 @@
 	--guide-mark: #e8a13a; /* the current item, focus */
 	--guide-square: #dc7028; /* the logo's square */
 	--guide-dash: #4a4238; /* the rule over a section */
+	--guide-field: #2e2822; /* the search field, the selects */
+	--guide-current: #2e2822; /* the current page's card on the band */
 	--guide-tip-bg: #3b3221;
-	--guide-tip-border: #5a4a2c;
+	--guide-tip-border: transparent;
 	--guide-tip-label: #f2c230;
 	--guide-tip-text: #f4eee2;
 	--guide-tip-shadow: none;
-	--guide-shot-border: #3a332c;
+	--guide-shot-border: transparent;
 	--guide-shot-shadow: none;
 	--guide-button-bg: #f4eee2;
 	--guide-button-text: #171411;
@@ -81,7 +85,7 @@
 	--sl-color-text-accent: var(--sl-color-accent-high);
 	--sl-color-text-invert: var(--sl-color-black);
 	--sl-color-bg-nav: var(--sl-color-black);
-	--sl-color-bg-sidebar: var(--sl-color-black);
+	--sl-color-bg-sidebar: #ede4d3; /* the website's kraft band */
 	--sl-color-bg-inline-code: var(--sl-color-gray-6);
 	--sl-color-hairline-light: var(--sl-color-gray-5);
 	--sl-color-hairline: var(--sl-color-gray-5);
@@ -94,6 +98,8 @@
 	--guide-mark: #d66a20;
 	--guide-square: #d66a20;
 	--guide-dash: #cdbfa6;
+	--guide-field: #ede4d3;
+	--guide-current: #fbf8f1;
 	--guide-tip-bg: #f2c230;
 	--guide-tip-border: transparent;
 	--guide-tip-label: #1e1a16;
@@ -114,9 +120,31 @@ body {
 	outline-offset: 2px;
 }
 
-/* The header: DM Mono. Starlight draws the one line under it, in --sl-color-hairline-shade. */
+/* The header: DM Mono, on the paper as the website's, with no line under it. */
 .header {
 	font-family: var(--sl-font-mono);
+	border-bottom-color: transparent;
+}
+.social-icons::after {
+	border-inline-end-color: transparent;
+}
+
+/* No lines between the columns: the sidebar is the band, the page the paper. */
+.sidebar-pane {
+	border-inline-end-color: transparent;
+}
+.right-sidebar {
+	border-inline-start-color: transparent;
+}
+
+/* The search field, filled with no outline. */
+site-search button[data-open-modal] {
+	border-color: transparent;
+	background-color: var(--guide-field);
+}
+site-search button[data-open-modal]:hover {
+	border-color: transparent;
+	background-color: var(--sl-color-gray-5);
 }
 
 /* The sidebar: DM Mono, group labels in small capitals, the current page a card
@@ -143,7 +171,7 @@ body {
 .sidebar-content [aria-current='page']:focus {
 	font-weight: 500;
 	color: var(--sl-color-white);
-	background-color: var(--sl-color-gray-6);
+	background-color: var(--guide-current);
 	box-shadow: inset 3px 0 0 var(--guide-mark);
 	border-radius: 6px;
 }
@@ -232,7 +260,8 @@ starlight-toc a[aria-current='true']:hover {
 }
 
 /* A screenshot of the app, framed so it reads as the app, not the page: a dark edge and
-   the paper's shadow in light, a hairline in dark (Screenshot.astro). */
+   the paper's shadow in light, no edge in dark, where the app's own dark sets it apart
+   (Screenshot.astro). */
 .guide-screenshot {
 	margin: 1.5rem 0;
 	display: flex;
@@ -266,15 +295,15 @@ starlight-theme-select label,
 starlight-lang-select label {
 	height: 2.5rem;
 	box-sizing: border-box;
-	border: 1px solid var(--sl-color-hairline);
+	border: 1px solid transparent;
 	border-radius: 6px;
-	background-color: var(--sl-color-gray-6);
+	background-color: var(--guide-field);
 	color: var(--sl-color-white);
 	font-family: var(--sl-font-mono);
 }
 starlight-theme-select label:hover,
 starlight-lang-select label:hover {
-	border-color: var(--sl-color-gray-4);
+	background-color: var(--sl-color-gray-5);
 }
 starlight-theme-select .label-icon,
 starlight-lang-select .label-icon {
@@ -326,7 +355,7 @@ starlight-lang-select option {
 	starlight-lang-select select::picker(select) {
 		margin-block: 0.35rem;
 		padding: 0.35rem;
-		border: 1px solid var(--sl-color-hairline);
+		border: 1px solid transparent;
 		border-radius: 8px;
 		background-color: var(--sl-color-gray-6);
 		box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
