@@ -17,7 +17,7 @@ Astro needs Node.js 22.23.4 or later.
 ## How it is organised
 
 - **Pages** are Markdown in `src/content/docs/<language>/`, English (`en`, in British English) the source. A page missing in Ukrainian (`uk`) or Polish (`pl`) shows the English page with a note saying so.
-- **Four kinds of page**, after [Diátaxis](https://diataxis.fr/): `getting-started/`, `how-to/`, `tools/` and `concepts/`.
+- **Four kinds of page**, after [Diátaxis](https://diataxis.fr/): `getting-started/`, `how-to/`, `tools/` and `concepts/`. Tools are split by kind: processing tools in `tools/processing/`, such as `tools/processing/exposure`, and utility tools, which edit nothing of their own, in `tools/utility/`, such as `tools/utility/export`.
 - **Help topics:** the app opens `/{version}/{language}/topic/{topic}/`, and a page answers the topics it lists in its front matter. The address then sends the reader to that page, wherever it is:
 
   ```yaml
